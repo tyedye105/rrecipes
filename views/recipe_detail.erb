@@ -7,8 +7,6 @@
 <div id="update-form">
   <form  action="/recipes/<%= @recipe.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
-
-
       <div class="form-group">
         <label for="update-recipe-name">Name</label>
         <input type="text" name="update-recipe-name" id="update-recipe-name">
@@ -19,8 +17,10 @@
         <textarea type="text" name="update-recipe-instruction" id="update-recipe-instruction">
       </div>
       <button class="btn blue">Update!</button>
-
-
+  </form>
+  <form action="/recipes/<%= @recipe.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button class="btn red" name="button">Delete!</button>
   </form>
 
 </div>

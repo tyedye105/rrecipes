@@ -32,3 +32,9 @@ patch '/recipes/:id' do
   recipe.update({:name => update_name, :instruction => update_instruction})
   redirect "/recipes/#{recipe.id}"
 end
+
+delete '/recipes/:id' do
+  to_delete = params.fetch("id").to_i
+  Recipe.find(to_delete).destroy
+  redirect '/'
+end
