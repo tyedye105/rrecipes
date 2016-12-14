@@ -7,5 +7,9 @@ describe Recipe do
       beef = Ingredient.create({:name => "Beef", :amount => "2lb", :recipe_id => steak_pie.id})
       expect(steak_pie.ingredients).to eq [beef]
     end
+    it "returns an empty array if there are no ingredients" do
+      steak_pie = Recipe.create({:name => "Steak Pie", :instruction => "Many"})
+      expect(steak_pie.ingredients).to eq []
+    end
   end
 end

@@ -12,6 +12,7 @@ describe "recipe box app", {:type => :feature} do
       expect(page).to have_content "Beef Wellington"
     end
   end
+
   describe "the add recipes path" do
     it "will let the user add new recipes" do
       visit '/'
@@ -22,14 +23,21 @@ describe "recipe box app", {:type => :feature} do
     end
   end
 
-    describe "the individual recipe view" do
-      it "will let the user view the specifics of a specific recipe" do
-        test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
-          visit "/recipes/#{test_recipe.id}"
-          expect(page).to have_content "Baja Skillet"
-
-      end
+  describe "the individual recipe view" do
+    it "will let the user view the specifics of a specific recipe" do
+      test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
+      visit "/recipes/#{test_recipe.id}"
+      expect(page).to have_content "Baja Skillet"
     end
+    it "shows a list of ingredients for the recipe" do
+      test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
+      test_ingredient = Ingredient.create({:name => "Chicken", :amount => "uh. some."})
+      test_recipe.ingredients.push(test_ingredient)
+      visit "/recipes/#{test_recipe.id}"
+      expect(page).to have_content "uh. some. Chicken"
+    end
+  end
+
   describe "the update recipes path" do
     it "will let the user update a recipe" do
       test_recipe = Recipe.create({:name => "Country Skillet", :instruction => "has many"})
@@ -47,7 +55,6 @@ describe "recipe box app", {:type => :feature} do
       visit "/recipes/#{test_recipe.id}"
       click_button('Delete!')
       expect(page).to have_content 'Infinite'
-
     end
   end
 end

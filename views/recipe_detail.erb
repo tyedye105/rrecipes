@@ -1,6 +1,16 @@
 <h1><%= @recipe.name %></h1>
 
-<br>
+<div id="ingredient">
+  <ul>
+    <%# empty array is truthy in ruby, need to check .length %>
+    <%# .length is truthy too. 0 is truthy in ruby. WTF. %>
+    <% unless @recipe.ingredients.empty? %>
+      <% @recipe.ingredients.each do |ingredient| %>
+        <li><%= ingredient.amount %> <%= ingredient.name %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
 
 <p><%= @recipe.instruction %></p>
 
