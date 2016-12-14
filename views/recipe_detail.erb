@@ -7,6 +7,13 @@
     <% unless @recipe.ingredients.empty? %>
       <% @recipe.ingredients.each do |ingredient| %>
         <li><%= ingredient.amount %> <%= ingredient.name %></li>
+        <div class="edit-mode hidden">
+          <form action="/ingredients/<%= ingredient.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="recipe-id" value="<%= @recipe.id %>">
+            <button class="btn red delete-small" id="ingredient-delete-<%= ingredient.id %>">Delete!</button>
+          </form>
+        </div>
       <% end %>
     <% end %>
   </ul>

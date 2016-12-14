@@ -48,3 +48,8 @@ post '/ingredients' do
   Recipe.find(recipe_id).ingredients.push(ingredient)
   redirect "/recipes/#{recipe_id}"
 end
+
+delete '/ingredients/:id' do
+  Ingredient.find(params.fetch('id').to_i).destroy
+  redirect "/recipes/#{params.fetch('recipe-id')}"
+end

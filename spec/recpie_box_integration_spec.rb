@@ -69,4 +69,16 @@ describe "recipe box app", {:type => :feature} do
       expect(page).to have_content "1lb Chicken"
     end
   end
+
+  describe "the delete ingredients path" do
+    it "allows the user to delete ingredients" do
+      test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
+      test_ingredient = Ingredient.create({:name => "Chicken", :amount => "2lb"})
+      test_recipe.ingredients.push(test_ingredient)
+      visit "/recipes/#{test_recipe.id}"
+      find("#ingredient-delete-#{test_ingredient.id}").click
+      expect(page).to have_content "Baja Skillet"
+      expect(page).not_to have_content "2lb Chicken"
+    end
+  end
 end
