@@ -17,6 +17,20 @@
       <% end %>
     <% end %>
   </ul>
+  <ul>
+    <% unless @recipe.tags.empty? %>
+      <% @recipe.tags.each do |tags| %>
+        <li><%= tag.name %></li>
+        <div class="edit-mode hidden">
+          <form action="/tags/<%= tag.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="recipe-id" value="<%= @recipe.id %>">
+            <button class="btn red delete-small" id="tag-delete-<%= tag.id %>">Delete!</button>
+          </form>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
 </div>
 
 <p><%= @recipe.instruction %></p>
@@ -64,5 +78,18 @@
       <button class="btn blue">Add!</button>
     </form>
   </div>
+</div>
 
+<div id="add-tags" class="edit-mode hidden card blue-grey lighten-3 white-text">
+  <div class="card-content">
+    <h5>Add Tags</h5>
+    <form action="/ingredients" method="post">
+      <input type="hidden" name="recipe-id" value="<%= @recipe.id %>">
+      <div class="form-group">
+        <label for="new-tags" class="black-text">Enter Tags (comma separated)</label>
+        <input type="text" name="new-tags" id="new-tags">
+      </div>
+      <button class="btn blue">Add Tags!</button>
+    </form>
+  </div>
 </div>

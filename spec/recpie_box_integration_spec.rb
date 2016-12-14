@@ -37,6 +37,10 @@ describe "recipe box app", {:type => :feature} do
       visit "/recipes/#{test_recipe.id}"
       expect(page).to have_content "uh. some. Chicken"
     end
+
+    it "shows a list of tags for the recipe" do
+
+    end
   end
 
   describe "the update recipes path" do
@@ -81,4 +85,5 @@ describe "recipe box app", {:type => :feature} do
       expect(page).not_to have_content "2lb Chicken"
     end
   end
+
 end

@@ -12,4 +12,10 @@ describe Recipe do
       expect(steak_pie.ingredients).to eq []
     end
   end
+  describe '#find_by_name' do
+    it "doesn't exist, right?" do
+      recipe = Recipe.create({:name => "Steak Pie", :instruction => "Many"})
+      expect(Recipe.find_by_instruction("Many")).to eq recipe
+    end
+  end
 end

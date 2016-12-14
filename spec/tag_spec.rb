@@ -9,4 +9,12 @@ describe Tag do
       expect(test_tag.recipes).to eq [steak_pie]
     end
   end
+  describe '.find_by_name' do
+    it 'will find the tag by name' do
+      test_tag = Tag.create({:name => "meaty"})
+      expect(Tag.find_by_name("meaty")).to eq test_tag
+
+    end
+  end
+
 end
