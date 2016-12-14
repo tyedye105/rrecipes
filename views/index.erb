@@ -1,0 +1,9 @@
+<h1>Welcome the Box of Infinite Recipes</h1>
+<div id="recipes-display">
+  <% @recipes.each do |recipe| %>
+    <div class="recipe-item">
+      <h4><%= recipe.name %></h4>
+      <p><%= recipe.instruction %></p>
+    </div>
+  <% end %>
+</div>

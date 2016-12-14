@@ -8,5 +8,6 @@ require('recipe')
 require('tag')
 
 get('/') do
+  @recipes = Recipe.all
   erb(:index)
 end
