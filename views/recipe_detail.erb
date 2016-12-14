@@ -14,23 +14,48 @@
 
 <p><%= @recipe.instruction %></p>
 
-<div id="update-form">
-  <form  action="/recipes/<%= @recipe.id %>" method="post">
-    <input type="hidden" name="_method" value="patch">
-      <div class="form-group">
-        <label for="update-recipe-name">Name</label>
-        <input type="text" name="update-recipe-name" id="update-recipe-name">
-      </div>
+<button class="btn grey-blue" onclick="editMode()">Toggle Edit</button>
 
-      <div class="form-group">
-        <label for="update-recipe-instruction">Instructions</label>
-        <textarea type="text" name="update-recipe-instruction" id="update-recipe-instruction">
+<div id="update-form" class="edit-mode hidden card blue-grey lighten-3 white-text">
+  <div class="card-content">
+
+    <h5>Edit Recipe</h5>
+    <form  action="/recipes/<%= @recipe.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+        <div class="form-group">
+          <label for="update-recipe-name" class="black-text">Name</label>
+          <input type="text" name="update-recipe-name" id="update-recipe-name">
+        </div>
+
+        <div class="form-group">
+          <label for="update-recipe-instruction" class="black-text">Instructions</label>
+          <textarea type="text" name="update-recipe-instruction" id="update-recipe-instruction" class="white blue-grey-text"></textarea>
+        </div>
+        <button class="btn blue">Update!</button>
+    </form>
+    <form action="/recipes/<%= @recipe.id %>" method="post" class="right">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn red right delete" name="button">Delete!</button>
+    </form>
+  </div>
+</div>
+<div id="update-form" class="edit-mode hidden card blue-grey lighten-3 white-text">
+  <div class="card-content">
+    <h5>Add New Ingredient</h5>
+    <form action="/ingredients" method="post">
+      <input type="hidden" name="recipe-id" value="<%= @recipe.id %>">
+      <div class="form-group row">
+        <div class="col m3">
+          <label for="new-ingredient-amount" class="black-text">Amount</label>
+          <input type="text" name="new-ingredient-amount" id="new-ingredient-amount">
+        </div>
+          <div class="col m9">
+            <label for="new-ingredient-name" class="black-text">Name</label>
+            <input type="text" name="new-ingredient-name" id="new-ingredient-name">
+          </div>
       </div>
-      <button class="btn blue">Update!</button>
-  </form>
-  <form action="/recipes/<%= @recipe.id %>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button class="btn red" name="button">Delete!</button>
-  </form>
+      <button class="btn blue">Add!</button>
+    </form>
+  </div>
 
 </div>

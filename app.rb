@@ -38,3 +38,13 @@ delete '/recipes/:id' do
   Recipe.find(to_delete).destroy
   redirect '/'
 end
+
+post '/ingredients' do
+  recipe_id = params.fetch('recipe-id').to_i
+  ingredient = Ingredient.create({
+    :name => params.fetch('new-ingredient-name'),
+    :amount => params.fetch('new-ingredient-amount')
+  })
+  Recipe.find(recipe_id).ingredients.push(ingredient)
+  redirect "/recipes/#{recipe_id}"
+end

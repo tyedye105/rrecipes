@@ -29,6 +29,7 @@ describe "recipe box app", {:type => :feature} do
       visit "/recipes/#{test_recipe.id}"
       expect(page).to have_content "Baja Skillet"
     end
+
     it "shows a list of ingredients for the recipe" do
       test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
       test_ingredient = Ingredient.create({:name => "Chicken", :amount => "uh. some."})
@@ -55,6 +56,17 @@ describe "recipe box app", {:type => :feature} do
       visit "/recipes/#{test_recipe.id}"
       click_button('Delete!')
       expect(page).to have_content 'Infinite'
+    end
+  end
+
+  describe "the create ingredients path" do
+    it "allows the user to add new ingredients to a recipe" do
+      test_recipe = Recipe.create({:name => "Baja Skillet", :instruction => "has many"})
+      visit "/recipes/#{test_recipe.id}"
+      fill_in('new-ingredient-amount', :with => "1lb")
+      fill_in('new-ingredient-name', :with => "Chicken")
+      click_button('Add!')
+      expect(page).to have_content "1lb Chicken"
     end
   end
 end
