@@ -33,11 +33,21 @@ describe "recipe box app", {:type => :feature} do
   describe "the update recipes path" do
     it "will let the user update a recipe" do
       test_recipe = Recipe.create({:name => "Country Skillet", :instruction => "has many"})
-        visit "/recipes/#{test_recipe.id}"
-        fill_in('update-recipe-name', :with => 'Country Hashbrown')
-        fill_in('update-recipe-instruction', :with => '7 easy steps')
-        click_button('Update!')
-        expect(page).to have_content "Country Hashbrown"
+      visit "/recipes/#{test_recipe.id}"
+      fill_in('update-recipe-name', :with => 'Country Hashbrown')
+      fill_in('update-recipe-instruction', :with => '7 easy steps')
+      click_button('Update!')
+      expect(page).to have_content "Country Hashbrown"
+    end
+  end
+
+  describe "the delete recipes path" do
+    it "will let the user delete a recipe from the database" do
+      test_recipe = Recipe.create({:name => "Country Skillet", :instruction => "has many"})
+      visit "/recipes/#{test_recipe.id}"
+      click_button('Delete!')
+      expect(page).to have_content 'Infinite'
+
     end
   end
 end
